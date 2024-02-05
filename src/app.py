@@ -36,7 +36,7 @@ def get_context_retriever_chain(vector_store):
 
     prompt = ChatPromptTemplate.from_messages([
         MessagesPlaceholder(variable_name="chat_history"),
-        ("user","{input")
+        ("user","{input}"),
         ("user","Given the above conversation, generate a search query to look up in order to get information relevant to the conversation")
     ])
 
@@ -50,7 +50,7 @@ def get_conversational_rag_chain(retriever_chain):
 
     llm = ChatOpenAI()
 
-    prompt = ChatPromptTemplate([
+    prompt = ChatPromptTemplate.from_messages([
         ("system", "Answer the user's questions based on the below context:\n\n{context}"),
       MessagesPlaceholder(variable_name="chat_history"),
       ("user", "{input}"),
